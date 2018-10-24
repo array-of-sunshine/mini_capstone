@@ -27,9 +27,23 @@
 # randomly assign a 1 or a 2 to each product's supplier_id
 
 
-products = Product.all
+# products = Product.all
+
+# products.each do |product|
+#   product.supplier_id = rand(1..2)# random number between 1 and 2
+#   product.save
+# end
+
+
+# get all the products
+# get the image url from each of them
+# make a new image with the image_url that was saved
+
+products = Product.order(:id)
 
 products.each do |product|
-  product.supplier_id = rand(1..2)# random number between 1 and 2
-  product.save
+  p product.image_url
+  image = Image.new(url: product.image_url, product_id: product.id)
+  image.save
 end
+
