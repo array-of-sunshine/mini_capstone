@@ -1,8 +1,12 @@
 class Api::OrdersController < ApplicationController
   def index
     # @orders = Order.where(user_id: current_user.id)
-    @orders = current_user.orders
-    render "index.json.jbuilder"
+    if current_user
+      @orders = current_user.orders
+      render "index.json.jbuilder"
+    else
+      render json: [], status: :unauthorized
+    end
   end
 
   def create
