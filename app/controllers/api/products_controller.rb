@@ -1,4 +1,7 @@
 class Api::ProductsController < ApplicationController
+  before_action :authenticate_admin, only: [:create, :update, :destroy]
+  # before_action :authenticate_admin, except: [:index, :show]
+
   def index
     search_term = params[:user_input]
     @products = Product.where('name LIKE ?', "%#{search_term}%")
@@ -24,8 +27,8 @@ class Api::ProductsController < ApplicationController
     @product = Product.new(
       name: params[:name],
       price: params[:price],
-      image_url: params[:image_url],
-      description: params[:description]
+      description: params[:description],
+      supplier_id: 1
     )
     # the save could work, the save could break
     if @product.save
@@ -44,7 +47,6 @@ class Api::ProductsController < ApplicationController
     @product.update(
       name: params[:name],
       price: params[:price],
-      image_url: params[:image_url],
       description: params[:description]
     )
     render "show.json.jbuilder"

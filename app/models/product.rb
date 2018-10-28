@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
   has_many :orders
-  belongs_to :supplier
+  belongs_to :supplier, optional: true
   has_many :images
   # def supplier
   #   Supplier.find_by(id: supplier_id)
