@@ -1,5 +1,5 @@
 class Api::OrdersController < ApplicationController
-  before_action :authenticate_user
+  # before_action :authenticate_user
 
   def index
     # @orders = Order.where(user_id: current_user.id)
@@ -15,7 +15,7 @@ class Api::OrdersController < ApplicationController
 
     price = product.price
 
-    calculated_subtotal = params[:quantity].to_i * price
+    calculated_subtotal = price * params[:quantity].to_i
     calculated_tax = calculated_subtotal * 0.09
     calculated_total = calculated_subtotal + calculated_tax
 
