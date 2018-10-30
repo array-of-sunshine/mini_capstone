@@ -9,3 +9,4 @@ json.is_discounted? product.is_discounted?
 json.tax product.tax
 json.total product.total
 json.name_of_supplier product.supplier.name
+json.categories product.categories

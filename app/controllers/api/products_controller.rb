@@ -12,6 +12,16 @@ class Api::ProductsController < ApplicationController
       # sort by id
       @products = @products.order(:id => :asc)
     end
+
+    if params[:input_category]
+      category_name = params[:input_category]
+      # find the category 'games'
+      category = Category.find_by(name: category_name)
+      # find all the products associated with that category
+      @products = category.products
+    end
+
+
     render "index.json.jbuilder"
   end
 
