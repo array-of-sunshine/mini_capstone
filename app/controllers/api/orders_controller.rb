@@ -8,29 +8,21 @@ class Api::OrdersController < ApplicationController
   end
 
   def create
-    # most basic create action of all time
-    # subtotal
-    # subtotal == quantity * price
-    product = Product.find_by(id: params[:product_id])
-
-    price = product.price
-
-    calculated_subtotal = price * params[:quantity].to_i
-    calculated_tax = calculated_subtotal * 0.09
-    calculated_total = calculated_subtotal + calculated_tax
-
-    @order = Order.new(
-      product_id: params[:product_id],
-      user_id: current_user.id,
-      quantity: params[:quantity],
-      subtotal: calculated_subtotal,
-      total: calculated_total,
-      tax: calculated_tax
-    )
-    @order.save
-    # how can i figure out why this isn't saving
-    p @order.errors.full_messages
-    render "show.json.jbuilder"
+    # one product
+    # group of products
+    # how can i get the correct products? why don't i want all of them?
+    # @carted_products = CartedProduct.where(user_id: current_user.id, status: 'carted')
+    # # go to each product the user want to buy and figure out how much it costs (also factor in quantity)
+    # @order = Order.new(
+    #   user_id: current_user.id,
+    #   subtotal: ,
+    #   tax: ,
+    #   total:
+    # )
+    # @order.save
+    # # how can i figure out why this isn't saving
+    # p @order.errors.full_messages
+    # render "show.json.jbuilder"
 
     # intake params
     # Order.new something something
